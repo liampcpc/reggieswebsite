@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Areas We Service | Reggie's Windows & Gutters</title>
+<link rel="stylesheet" href="/assets/styles.css">
+<style>
+  .opt-hero { padding: 100px 20px 40px; text-align: center; }
+  .opt-hero h1 { font-family: var(--vntg-font-h); font-size: clamp(40px, 6vw, 64px); font-weight: 900; line-height: 1; color: var(--vntg-navy); margin-bottom: 16px; letter-spacing: -0.01em; }
+  .opt-hero p { font-size: 17px; color: var(--vntg-grey); max-width: 560px; margin: 0 auto; line-height: 1.6; }
+
+  .opt-map-layout { max-width: 1200px; margin: 0 auto; padding: 20px 20px 100px; display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: start; }
+  .opt-map-sticky { position: sticky; top: 100px; }
+  .opt-map-frame { position: relative; border-radius: 16px; overflow: hidden; border: 1.5px solid var(--vntg-border); }
+  .opt-map-frame img { width: 100%; display: block; }
+  .opt-map-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .opt-map-region { fill: rgba(181,52,42,0); stroke: rgba(181,52,42,0); stroke-width: 0.5; transition: fill 0.3s ease; cursor: pointer; }
+  .opt-map-region.active { fill: rgba(181,52,42,0.35); stroke: rgba(181,52,42,0.6); }
+
+  .opt-region-list { display: flex; flex-direction: column; gap: 4px; }
+  .opt-region-item { border: 1.5px solid var(--vntg-border); border-radius: 12px; margin-bottom: 12px; overflow: hidden; transition: border-color 0.2s; }
+  .opt-region-item.active { border-color: var(--vntg-navy); }
+  .opt-region-head { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; cursor: pointer; background: var(--vntg-white); }
+  .opt-region-head-left { display: flex; align-items: center; gap: 14px; }
+  .opt-region-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--vntg-red); flex-shrink: 0; }
+  .opt-region-name { font-family: var(--vntg-font-h); font-size: 20px; font-weight: 900; color: var(--vntg-navy); }
+  .opt-region-count { font-size: 13px; color: var(--vntg-grey); }
+  .opt-region-chevron { transition: transform 0.25s ease; color: var(--vntg-grey); }
+  .opt-region-item.active .opt-region-chevron { transform: rotate(180deg); }
+  .opt-region-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: var(--vntg-bg-mid); }
+  .opt-region-item.active .opt-region-body { max-height: 300px; }
+  .opt-region-suburbs { display: flex; flex-wrap: wrap; gap: 10px; padding: 20px 24px 24px; }
+  .opt-suburb-pill { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 100px; font-size: 14px; font-weight: 600; text-decoration: none; border: 1.5px solid var(--vntg-border); background: var(--vntg-white); color: var(--vntg-navy); }
+  .opt-suburb-pill.live:hover { border-color: var(--vntg-navy); }
+  .opt-suburb-pill.soon { color: var(--vntg-grey); background: transparent; cursor: default; }
+
+  @media(max-width: 900px) {
+    .opt-map-layout { grid-template-columns: 1fr; }
+    .opt-map-sticky { position: static; }
+  }
+</style>
+</head>
+<body>
+
+<div class="vntg-section-wrapper">
+
+  <nav class="vntg-nav">
+    <a href="/" class="vntg-nav-logo">
+      <img src="https://assets.cdn.filesafe.space/dHuu0Og767vhLl3YnwTF/media/69e1eb7b50b9a3263a8287f7.png" class="vntg-main-logo" alt="Reggie's Window & Gutters">
+    </a>
+    <div class="vntg-nav-pill">
+      <ul class="vntg-nav-links" id="vntg-nav-links">
+        <li><a href="/residential">Residential</a></li>
+        <li><a href="/commercial">Commercial</a></li>
+        <li><a href="/solar">Solar Panels</a></li>
+        <li><a href="/gutters">Gutters</a></li>
+        <li class="vntg-active"><a href="/locations">Locations</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+    </div>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <a href="/quote" class="vntg-nav-cta">Get Quote</a>
+      <button class="vntg-mobile-toggle" onclick="vntgToggleNav()">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <section class="opt-hero vntg-animate">
+    <h1>Areas we service.</h1>
+    <p>Hover the map or a region below — click through to see suburb-specific pricing and details.</p>
+  </section>
+
+  <div class="opt-map-layout vntg-animate">
+    <div class="opt-map-sticky">
+      <div class="opt-map-frame">
+        <img src="https://assets.cdn.filesafe.space/dHuu0Og767vhLl3YnwTF/media/69dece433d447256449bba4e.png" alt="Map of Melbourne">
+        <svg class="opt-map-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <polygon class="opt-map-region" data-region="brunswick" points="40,20 60,20 60,45 40,45"></polygon>
+          <polygon class="opt-map-region" data-region="malvern" points="50,55 90,55 90,90 50,90"></polygon>
+          <polygon class="opt-map-region" data-region="ascot-vale" points="10,35 35,35 35,65 10,65"></polygon>
+          <polygon class="opt-map-region" data-region="ivanhoe" points="65,10 95,10 95,45 65,45"></polygon>
+        </svg>
+      </div>
+    </div>
+
+    <div class="opt-region-list">
+      <div class="opt-region-item active" data-region="brunswick">
+        <div class="opt-region-head" onclick="optToggleRegion(this)">
+          <div class="opt-region-head-left"><span class="opt-region-dot"></span><div><div class="opt-region-name">Inner North</div><div class="opt-region-count">Brunswick &amp; surrounds</div></div></div>
+          <svg class="opt-region-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="opt-region-body">
+          <div class="opt-region-suburbs">
+            <a href="/locations/brunswick" class="opt-suburb-pill live">Brunswick →</a>
+            <a href="/locations/northcote" class="opt-suburb-pill live">Northcote →</a>
+            <a href="/locations/coburg" class="opt-suburb-pill live">Coburg →</a>
+            <a href="/locations/clifton-hill" class="opt-suburb-pill live">Clifton Hill →</a>
+            <span class="opt-suburb-pill soon">Fitzroy</span>
+            <span class="opt-suburb-pill soon">Carlton</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="opt-region-item" data-region="malvern">
+        <div class="opt-region-head" onclick="optToggleRegion(this)">
+          <div class="opt-region-head-left"><span class="opt-region-dot"></span><div><div class="opt-region-name">Inner East</div><div class="opt-region-count">Malvern &amp; surrounds</div></div></div>
+          <svg class="opt-region-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="opt-region-body">
+          <div class="opt-region-suburbs">
+            <a href="/locations/malvern" class="opt-suburb-pill live">Malvern →</a>
+            <span class="opt-suburb-pill soon">Toorak</span>
+            <span class="opt-suburb-pill soon">Armadale</span>
+            <span class="opt-suburb-pill soon">Prahran</span>
+            <span class="opt-suburb-pill soon">Glen Iris</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="opt-region-item" data-region="ascot-vale">
+        <div class="opt-region-head" onclick="optToggleRegion(this)">
+          <div class="opt-region-head-left"><span class="opt-region-dot"></span><div><div class="opt-region-name">Inner West</div><div class="opt-region-count">Ascot Vale &amp; surrounds</div></div></div>
+          <svg class="opt-region-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="opt-region-body">
+          <div class="opt-region-suburbs">
+            <a href="/locations/ascot-vale" class="opt-suburb-pill live">Ascot Vale →</a>
+            <span class="opt-suburb-pill soon">Moonee Ponds</span>
+            <span class="opt-suburb-pill soon">Essendon</span>
+            <span class="opt-suburb-pill soon">Maribyrnong</span>
+            <span class="opt-suburb-pill soon">Flemington</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="opt-region-item" data-region="ivanhoe">
+        <div class="opt-region-head" onclick="optToggleRegion(this)">
+          <div class="opt-region-head-left"><span class="opt-region-dot"></span><div><div class="opt-region-name">North East</div><div class="opt-region-count">Ivanhoe &amp; surrounds</div></div></div>
+          <svg class="opt-region-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="opt-region-body">
+          <div class="opt-region-suburbs">
+            <a href="/locations/ivanhoe" class="opt-suburb-pill live">Ivanhoe →</a>
+            <span class="opt-suburb-pill soon">Eaglemont</span>
+            <span class="opt-suburb-pill soon">Rosanna</span>
+            <span class="opt-suburb-pill soon">Heidelberg</span>
+            <span class="opt-suburb-pill soon">Alphington</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="vntg-cta-wrapper vntg-animate">
+    <div class="vntg-cta-grid">
+      <div class="vntg-cta-left">
+        <div class="vntg-cta-badge">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#b5342a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8A6 6 0 1 1 8 2a6 6 0 0 1 6 6z"/><path d="M5.5 8.5L7.5 10.5L11.5 5.5"/></svg>
+          Don't see your suburb?
+        </div>
+        <h2>We probably still service your area.</h2>
+        <p>These are just our most established areas — we cover far more of greater Melbourne. Get in touch and we'll confirm we can help.</p>
+        <div class="vntg-cta-buttons">
+          <a href="/quote" class="vntg-cta-btn-primary">Get a quote <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a href="tel:0406981681" class="vntg-cta-btn-outline"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 1.5h3l1.5 3.5L6 7s1 2.5 2.5 3.5l2-2 3.5 1.5v3a1 1 0 0 1-1 1C5 14 1.5 6.5 1.5 2.5a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.5" fill="none"/></svg> 0406 981 681</a>
+        </div>
+      </div>
+      <div class="vntg-cta-right">
+        <div class="vntg-metric-card">
+          <div class="vntg-metric-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg></div>
+          <div class="vntg-metric-text"><span class="vntg-metric-val">500+</span><span class="vntg-metric-lbl">Melbourne homes serviced</span></div>
+        </div>
+        <div class="vntg-metric-card">
+          <div class="vntg-metric-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <div class="vntg-metric-text"><span class="vntg-metric-val">5.0★</span><span class="vntg-metric-lbl">Average Google rating</span></div>
+        </div>
+        <div class="vntg-metric-card">
+          <div class="vntg-metric-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <div class="vntg-metric-text"><span class="vntg-metric-val">48hr</span><span class="vntg-metric-lbl">Typical booking turnaround</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="vntg-footer">
+    <div class="vntg-footer-top">
+      <div><div class="vntg-footer-brand">Reggie's.</div><p class="vntg-footer-tagline">Hospitality-grade cleaning for the home and business you're proud of.</p></div>
+      <div><div class="vntg-footer-col-title">Services</div><ul class="vntg-footer-links"><li><a href="/residential">Residential</a></li><li><a href="/commercial">Commercial</a></li><li><a href="/solar">Solar Panels</a></li><li><a href="/gutters">Gutters</a></li><li><a href="/about">About Us</a></li></ul></div>
+      <div><div class="vntg-footer-col-title">Contact</div><div class="vntg-footer-contact-item">0406 981 681</div><div class="vntg-footer-contact-item">hello@reggies.com.au</div><div class="vntg-footer-contact-item">Serving Melbourne &amp; surrounds</div></div>
+    </div>
+    <div class="vntg-footer-bottom">
+      <span>© 2026 Reggie's Window &amp; Gutter Cleaning. All rights reserved. <a href="/privacy-policy" style="color: rgba(247,245,242,.3); margin-left: 10px; text-decoration: underline;">Privacy Policy</a></span>
+      <span>ABN: 42 491 259 338</span>
+    </div>
+  </footer>
+</div>
+
+<script src="/assets/script.js"></script>
+<script>
+  function optToggleRegion(headEl) {
+    const item = headEl.parentElement;
+    const wasActive = item.classList.contains('active');
+    document.querySelectorAll('.opt-region-item').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.opt-map-region').forEach(el => el.classList.remove('active'));
+    if (!wasActive) {
+      item.classList.add('active');
+      const region = item.dataset.region;
+      document.querySelector(`.opt-map-region[data-region="${region}"]`)?.classList.add('active');
+    }
+  }
+
+  document.querySelectorAll('.opt-map-region').forEach(poly => {
+    poly.addEventListener('click', () => {
+      const region = poly.dataset.region;
+      const head = document.querySelector(`.opt-region-item[data-region="${region}"] .opt-region-head`);
+      if (head) optToggleRegion(head);
+    });
+  });
+
+  // Initialize first region's map highlight on load
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('.opt-map-region[data-region="brunswick"]')?.classList.add('active');
+  });
+</script>
+</body>
+</html>
