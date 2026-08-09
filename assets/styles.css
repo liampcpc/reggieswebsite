@@ -316,7 +316,7 @@ html, body { margin: 0; padding: 0; }
 /* ─── LOCATION (SUBURB) PAGE — hero, intro, suburb grid, FAQ ─── */
 .vntg-loc-hero { position: relative; padding: 100px 40px 64px; overflow: hidden; display: flex; align-items: center; justify-content: flex-start; min-height: 60vh; border-bottom: 1px solid var(--vntg-border); }
 .vntg-loc-hero-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
-.vntg-loc-hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(247, 245, 242, 0.85) 0%, rgba(247, 245, 242, 0.6) 60%, rgba(247, 245, 242, 0) 100%); z-index: 1; }
+.vntg-loc-hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(247, 245, 242, 0.6) 0%, rgba(247, 245, 242, 0.42) 60%, rgba(247, 245, 242, 0) 100%); z-index: 1; }
 .vntg-loc-hero-content { position: relative; z-index: 2; max-width: 900px; width: 100%; }
 .vntg-loc-tag { display: inline-flex; align-items: center; gap: 8px; background: var(--vntg-bg-mid); border: 1.5px solid var(--vntg-border); border-radius: 20px; padding: 6px 16px; font-size: 13px; font-weight: 700; letter-spacing: .1em; color: var(--vntg-navy); margin-bottom: 24px; }
 .vntg-loc-hero h1 { font-family: var(--vntg-font-h); font-size: clamp(48px, 8vw, 86px); font-weight: 900; line-height: .96; color: var(--vntg-navy); margin-bottom: 24px; letter-spacing: -0.01em; }
@@ -324,7 +324,16 @@ html, body { margin: 0; padding: 0; }
 .vntg-loc-hero-sub { font-size: clamp(17px, 2vw, 20px); color: var(--vntg-navy); opacity: 0.8; max-width: 600px; margin-bottom: 40px; line-height: 1.7; font-weight: 500; }
 .vntg-loc-hero-btns { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
 .vntg-loc-suburbs-bar { display: flex; flex-wrap: wrap; gap: 10px; }
-.vntg-loc-suburb-pill { display: inline-block; background: var(--vntg-white); border: 1.5px solid var(--vntg-border); border-radius: 20px; padding: 6px 16px; font-size: 15px; color: var(--vntg-navy); font-weight: 500; }
+.vntg-loc-suburb-pill { display: inline-block; background: var(--vntg-white); border: 1.5px solid var(--vntg-border); border-radius: 20px; padding: 6px 16px; font-size: 15px; color: var(--vntg-navy); font-weight: 500; text-decoration: none; }
+
+/* Real-photo hero legibility: breadcrumb/subtext sit directly on the image with no
+   background chip. Chosen treatment — a soft vignette pool behind the whole content
+   column (no hard edges), rather than per-element chips or pure text-shadow. */
+.vntg-loc-hero:not(.vntg-loc-hero-noimg) .vntg-loc-hero-sub { opacity: 1; }
+.vntg-loc-hero:not(.vntg-loc-hero-noimg) .vntg-loc-hero-content { position: relative; }
+.vntg-loc-hero:not(.vntg-loc-hero-noimg) .vntg-loc-hero-content::before { content: ""; position: absolute; left: -60px; top: -60px; right: -20%; bottom: -60px; background: radial-gradient(ellipse at 30% 50%, rgba(247,245,242,.75) 0%, rgba(247,245,242,.45) 45%, rgba(247,245,242,0) 75%); z-index: -1; }
+.vntg-loc-hero:not(.vntg-loc-hero-noimg) .vntg-btn-outline { background: var(--vntg-red); color: var(--vntg-white); border-color: var(--vntg-red); }
+.vntg-loc-hero:not(.vntg-loc-hero-noimg) .vntg-btn-outline:hover { background: var(--vntg-red-hover); border-color: var(--vntg-red-hover); }
 
 .vntg-loc-services-strip { background: var(--vntg-navy); padding: 48px 40px; display: flex; flex-wrap: wrap; gap: 0; }
 .vntg-loc-service-item { flex: 1; padding: 0 32px; border-right: 1px solid rgba(255,255,255,.1); display: flex; align-items: center; gap: 16px; min-width: 280px; }
@@ -448,7 +457,7 @@ html, body { margin: 0; padding: 0; }
   .vntg-dropdown-menu { position: static !important; box-shadow: none !important; border: none !important; display: none !important; padding-left: 16px !important; background: transparent !important; }
   .vntg-nav-dropdown.is-open .vntg-dropdown-menu { display: flex !important; }
 
-  .vntg-loc-hero-overlay { background: rgba(247, 245, 242, 0.9); }
+  .vntg-loc-hero-overlay { background: rgba(247, 245, 242, 0.63); }
   .vntg-loc-hero { padding: 80px 20px 40px; min-height: 50vh; }
 }
 
