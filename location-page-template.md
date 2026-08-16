@@ -1,6 +1,13 @@
 # Location Page Generation — Reusable Template
 Reggie's Window & Gutter Cleaning
 
+> **SUPERSEDED (Aug 2026).** The working process now lives in the `suburb-page-builder` skill
+> (`.claude/skills/suburb-page-builder/`), which carries the current page template, the exact
+> markup patterns, content rules learned since this doc was written, and a runnable `audit.py`
+> that mechanically checks SEO, headings, bidirectional internal linking, hub-page wiring and
+> sitemap coverage. Use the skill. This file is kept for the original SEO-brief format and
+> background reasoning only.
+
 This is the standing brief for generating new suburb/location pages (~3 per week). Reference this document each time instead of re-deriving the approach from scratch. It is not suburb-specific — replace `[SUBURB]` and the bracketed prompts below with the real details each time.
 
 ---
