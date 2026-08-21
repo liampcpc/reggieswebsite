@@ -136,6 +136,8 @@ def audit_page(slug):
     # --- Head boilerplate ---
     if 'rel="icon" href="/favicon.ico"' not in html:
         fail(p, "missing favicon block")
+    if 'sizes="192x192"' not in html:
+        fail(p, "missing 192x192 icon (Google wants a square that's a multiple of 48px)")
     if 'name="theme-color"' not in html:
         fail(p, "missing theme-color meta")
     if 'rel="manifest"' not in html:
